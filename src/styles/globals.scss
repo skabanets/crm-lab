@@ -1,0 +1,12 @@
+@use './variables' as *;
+@use './mixins' as *;
+@use './reset';
+
+body {
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  background: $bg;
+  color: $text;
+}
