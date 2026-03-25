@@ -1,0 +1,9 @@
+@use '@/styles/mixins' as *;
+@use '@/styles/variables' as *;
+
+.wrapper {
+  @include flex(row, center, center);
+
+  min-height: 100vh;
+  padding: $spacing-lg;
+}
