@@ -9,42 +9,44 @@
 }
 
 .sidebar {
-  @include flex(column, flex-start, flex-start);
+  @include flex(column, stretch, flex-start);
 
-  width: 240px;
+  width: 280px;
+  min-height: 100vh;
   padding: $spacing-lg;
   border-right: 1px solid $border;
-  background: #ffffff;
+  background: $sidebar-bg;
+  box-shadow: $sidebar-shadow;
+}
+
+.topSection {
+  @include flex(column, flex-start, flex-start);
+
+  gap: $spacing-lg;
 }
 
 .logo {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: $spacing-lg;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   color: $text;
 }
 
-.nav {
-  @include flex(column, flex-start, flex-start);
-
-  gap: $spacing-sm;
-  width: 100%;
+.navigationSection {
+  flex: 1;
+  min-height: 0;
+  margin-top: $spacing-lg;
+  overflow-y: auto;
 }
 
-.link {
-  width: 100%;
-  padding: $spacing-sm $spacing-md;
-  border-radius: $radius-md;
-  color: $text;
-  text-decoration: none;
-
-  &:hover {
-    background: rgba(79, 70, 229, 0.08);
-    color: $primary;
-  }
+.bottomSection {
+  margin-top: $spacing-lg;
+  padding-top: $spacing-md;
+  border-top: 1px solid $border;
 }
 
 .content {
   flex: 1;
-  padding: $spacing-lg;
+  min-width: 0;
+  padding: $spacing-xl;
 }

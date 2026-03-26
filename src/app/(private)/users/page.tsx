@@ -1,13 +1,5 @@
-import { signOut } from '@/actions/auth';
-
 const UsersPage = () => {
-  return (
-    <div>
-      <form action={signOut}>
-        <button type="submit">Logout</button>
-      </form>
-    </div>
-  );
+  return <h1>Users list</h1>;
 };
 
 export default UsersPage;

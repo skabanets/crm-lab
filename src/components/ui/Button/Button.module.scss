@@ -19,7 +19,7 @@
 
 .primary {
   background: $primary;
-  color: #ffffff;
+  color: $white;
 
   &:hover {
     background: $primary-hover;
@@ -27,13 +27,12 @@
 }
 
 .secondary {
-  background: #ffffff;
-  color: $primary;
+  background: $surface;
+  color: $text;
   border-color: $border;
 
   &:hover {
-    background: rgba(79, 70, 229, 0.06);
-    color: $primary-hover;
-    border-color: $primary-hover;
+    background: $surface-secondary;
+    border-color: $border-strong;
   }
 }
