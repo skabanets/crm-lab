@@ -4,8 +4,10 @@ type TUserPageProps = {
   };
 };
 
-const UserPage = ({ params }: TUserPageProps) => {
-  return <div>User id: {params.id}</div>;
+const UserPage = async ({ params }: TUserPageProps) => {
+  const { id } = await params;
+
+  return <div>User id: {id}</div>;
 };
 
 export default UserPage;

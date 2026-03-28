@@ -1,5 +1,7 @@
+import { UsersTableContainer } from '@/components/containers/UsersTableContainer/UsersTableContainer';
+
 const UsersPage = () => {
-  return <h1>Users list</h1>;
+  return <UsersTableContainer />;
 };
 
 export default UsersPage;
