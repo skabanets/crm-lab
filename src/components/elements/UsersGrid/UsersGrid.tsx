@@ -1,9 +1,8 @@
 'use client';
 
 import type { ColDef, RowClickedEvent } from 'ag-grid-community';
-import { AllCommunityModule } from 'ag-grid-community';
+import { AllCommunityModule, themeQuartz } from 'ag-grid-community';
 import { AgGridProvider, AgGridReact } from 'ag-grid-react';
-import cn from 'classnames';
 import { useRouter } from 'next/navigation';
 import { useMemo } from 'react';
 
@@ -67,17 +66,15 @@ const UsersGrid = ({ users }: TUsersGridProps) => {
   );
 
   const handleRowClick = (event: RowClickedEvent<TUser>) => {
-    if (!event.data) {
-      return;
-    }
-
+    if (!event.data) return;
     router.push(`${ROUTES.USERS}/${event.data.id}`);
   };
 
   return (
     <AgGridProvider modules={[AllCommunityModule]}>
-      <div className={cn('ag-theme-quartz', styles.gridWrapper)}>
+      <div className={styles.gridWrapper}>
         <AgGridReact<TUser>
+          theme={themeQuartz}
           rowData={users}
           columnDefs={columnDefs}
           defaultColDef={{
