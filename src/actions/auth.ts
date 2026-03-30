@@ -7,6 +7,7 @@ import { ROUTES } from '@/constants/routes.constant';
 import { createSupabaseServerClient } from '@/lib/supabase/server';
 import { signInSchema } from '@/schemas/auth.schema';
 import type { TActionState } from '@/types/auth.type';
+import { getZodFieldErrors } from '@/utils/getZodFieldErrors';
 
 const signIn = async (state: TActionState, formData: FormData) => {
   const supabase = await createSupabaseServerClient();
@@ -16,11 +17,9 @@ const signIn = async (state: TActionState, formData: FormData) => {
   const parsed = signInSchema.safeParse(rawData);
 
   if (!parsed.success) {
-    const fieldErrors = parsed.error.flatten().fieldErrors;
-
     return {
       ...state,
-      errors: fieldErrors,
+      errors: getZodFieldErrors(parsed.error),
     };
   }
 
