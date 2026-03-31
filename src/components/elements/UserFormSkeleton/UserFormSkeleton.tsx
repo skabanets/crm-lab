@@ -25,7 +25,8 @@ const UserFormSkeleton = () => {
         </div>
 
         <div className={styles.actions}>
-          <Skeleton className={styles.button} />
+          <Skeleton className={styles.buttonSecondary} />
+          <Skeleton className={styles.buttonPrimary} />
         </div>
       </div>
     </section>

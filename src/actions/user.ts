@@ -1,7 +1,6 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
 
 import { ROUTES } from '@/constants/routes.constant';
 import { USER_FORM_FIELDS } from '@/constants/user.constant';
@@ -10,7 +9,7 @@ import { updateUserSchema } from '@/schemas/user.schema';
 import type { TUpdateUserState } from '@/types/user.type';
 import { getZodFieldErrors } from '@/utils/getZodFieldErrors';
 
-const updateUser = async (state: TUpdateUserState, formData: FormData): Promise<TUpdateUserState> => {
+const updateUser = async (_state: TUpdateUserState, formData: FormData): Promise<TUpdateUserState> => {
   const supabase = await createSupabaseServerClient();
 
   const rawData = {
@@ -27,8 +26,9 @@ const updateUser = async (state: TUpdateUserState, formData: FormData): Promise<
 
   if (!parsed.success) {
     return {
-      ...state,
       errors: getZodFieldErrors(parsed.error),
+      error: undefined,
+      success: false,
     };
   }
 
@@ -50,12 +50,21 @@ const updateUser = async (state: TUpdateUserState, formData: FormData): Promise<
     .eq('id', id);
 
   if (error) {
-    return { error: error.message };
+    return {
+      errors: {},
+      error: error.message,
+      success: false,
+    };
   }
 
   revalidatePath(ROUTES.USERS);
   revalidatePath(`${ROUTES.USERS}/${id}`);
-  redirect(ROUTES.USERS);
+
+  return {
+    errors: {},
+    error: undefined,
+    success: true,
+  };
 };
 
 export { updateUser };

@@ -69,9 +69,16 @@
 
 .actions {
   @include flex(row, center, flex-end);
+
+  gap: $spacing-sm;
 }
 
-.button {
+.buttonSecondary {
+  width: 100px;
+  height: 44px;
+}
+
+.buttonPrimary {
   width: 140px;
   height: 44px;
 }

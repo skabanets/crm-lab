@@ -3,23 +3,27 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
+import { SIGN_IN_FORM_FIELDS } from '@/constants/auth.constant';
 import { ROUTES } from '@/constants/routes.constant';
 import { createSupabaseServerClient } from '@/lib/supabase/server';
 import { signInSchema } from '@/schemas/auth.schema';
 import type { TActionState } from '@/types/auth.type';
 import { getZodFieldErrors } from '@/utils/getZodFieldErrors';
 
-const signIn = async (state: TActionState, formData: FormData) => {
+const signIn = async (_state: TActionState, formData: FormData): Promise<TActionState> => {
   const supabase = await createSupabaseServerClient();
 
-  const rawData = Object.fromEntries(formData.entries());
+  const rawData = {
+    email: formData.get(SIGN_IN_FORM_FIELDS.EMAIL),
+    password: formData.get(SIGN_IN_FORM_FIELDS.PASSWORD),
+  };
 
   const parsed = signInSchema.safeParse(rawData);
 
   if (!parsed.success) {
     return {
-      ...state,
       errors: getZodFieldErrors(parsed.error),
+      error: undefined,
     };
   }
 
@@ -31,7 +35,10 @@ const signIn = async (state: TActionState, formData: FormData) => {
   });
 
   if (error) {
-    return { ...state, error: error.message };
+    return {
+      errors: {},
+      error: 'Incorrect email or password',
+    };
   }
 
   revalidatePath('/');
@@ -44,7 +51,7 @@ const signOut = async () => {
   await supabase.auth.signOut();
 
   revalidatePath('/');
-  redirect(`${ROUTES.LOGIN}`);
+  redirect(ROUTES.LOGIN);
 };
 
-export { signOut, signIn };
+export { signIn, signOut };

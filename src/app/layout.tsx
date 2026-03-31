@@ -1,5 +1,7 @@
+import cn from 'classnames';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+import { Toaster } from 'sonner';
 import '@/styles/globals.scss';
 
 const geistSans = Geist({
@@ -23,8 +25,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body>{children}</body>
+    <html lang="en" className={cn(geistSans.variable, geistMono.variable)}>
+      <body>
+        {children}
+        <Toaster richColors position="top-right" />
+      </body>
     </html>
   );
 }

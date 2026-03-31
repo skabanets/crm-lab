@@ -9,4 +9,6 @@ type TActionState = {
   error?: string;
 };
 
-export type { TSignInData, TActionState };
+type TSignInFormValues = TZodInfer<typeof signInSchema>;
+
+export type { TSignInData, TActionState, TSignInFormValues };

@@ -1,6 +1,7 @@
 import type { USER_ROLES, USER_STATUSES } from '@/constants/user.constant';
+import type { updateUserSchema } from '@/schemas/user.schema';
 
-import type { TNullable, TValueOf } from './utility.type';
+import type { TNullable, TValueOf, TZodInfer } from './utility.type';
 
 type TUserRole = TValueOf<typeof USER_ROLES>;
 
@@ -21,6 +22,8 @@ type TUser = TSidebarUser & {
   updated_at: string;
 };
 
+type TUpdateUserFormValues = TZodInfer<typeof updateUserSchema>;
+
 type TUserFormErrors = Partial<
   Record<'first_name' | 'last_name' | 'email' | 'phone' | 'role' | 'status' | 'id', string[]>
 >;
@@ -28,6 +31,7 @@ type TUserFormErrors = Partial<
 type TUpdateUserState = {
   errors?: TUserFormErrors;
   error?: string;
+  success?: boolean;
 };
 
-export type { TUserRole, TUserStatus, TSidebarUser, TUser, TUserFormErrors, TUpdateUserState };
+export type { TUserRole, TUserStatus, TSidebarUser, TUser, TUpdateUserFormValues, TUserFormErrors, TUpdateUserState };

@@ -35,8 +35,9 @@ const USER_FORM_ERRORS = {
 
 const INITIAL_STATE: TUpdateUserState = {
   errors: {},
-  error: '',
-} as const;
+  error: undefined,
+  success: false,
+};
 
 const ROLE_OPTIONS = [
   { label: 'Admin', value: USER_ROLES.ADMIN },

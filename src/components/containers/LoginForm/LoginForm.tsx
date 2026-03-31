@@ -1,60 +1,50 @@
 'use client';
 
-import { useActionState } from 'react';
-
-import { signIn } from '@/actions/auth';
 import { FormField } from '@/components/elements/FormField/FormField';
 import { Button } from '@/components/ui/Button/Button';
 import { Input } from '@/components/ui/Input/Input';
-import { INITIAL_STATE, SIGN_IN_FORM_FIELDS } from '@/constants/auth.constant';
-import type { TActionState } from '@/types/auth.type';
+import { SIGN_IN_FORM_FIELDS } from '@/constants/auth.constant';
 
+import { useLoginForm } from './hooks/useLoginForm';
 import styles from './LoginForm.module.scss';
 
 const LoginForm = () => {
-  const [state, formAction, isPending] = useActionState<TActionState, FormData>(signIn, INITIAL_STATE);
-
-  const emailError = state.errors?.email?.[0];
-  const passwordError = state.errors?.password?.[0];
+  const { register, submit, errors, isValid, isPending, isSubmitting } = useLoginForm();
 
   return (
-    <form className={styles.form} action={formAction}>
+    <form className={styles.form} onSubmit={submit}>
       <h1 className={styles.title}>Login</h1>
 
       <FormField.Root>
-        <FormField.Label htmlFor={SIGN_IN_FORM_FIELDS.email}>Email</FormField.Label>
+        <FormField.Label htmlFor={SIGN_IN_FORM_FIELDS.EMAIL}>Email</FormField.Label>
 
         <Input
-          id={SIGN_IN_FORM_FIELDS.email}
-          name={SIGN_IN_FORM_FIELDS.email}
+          id={SIGN_IN_FORM_FIELDS.EMAIL}
           type="email"
           placeholder="Enter your email"
-          hasError={Boolean(emailError)}
-          required
+          hasError={Boolean(errors.email?.message)}
+          {...register(SIGN_IN_FORM_FIELDS.EMAIL)}
         />
 
-        <FormField.Error>{emailError}</FormField.Error>
+        <FormField.Error>{errors.email?.message}</FormField.Error>
       </FormField.Root>
 
       <FormField.Root>
-        <FormField.Label htmlFor={SIGN_IN_FORM_FIELDS.password}>Password</FormField.Label>
+        <FormField.Label htmlFor={SIGN_IN_FORM_FIELDS.PASSWORD}>Password</FormField.Label>
 
         <Input
-          id={SIGN_IN_FORM_FIELDS.password}
-          name={SIGN_IN_FORM_FIELDS.password}
+          id={SIGN_IN_FORM_FIELDS.PASSWORD}
           type="password"
           placeholder="Enter your password"
-          hasError={Boolean(passwordError)}
-          required
+          hasError={Boolean(errors.password?.message)}
+          {...register(SIGN_IN_FORM_FIELDS.PASSWORD)}
         />
 
-        <FormField.Error>{passwordError}</FormField.Error>
+        <FormField.Error>{errors.password?.message}</FormField.Error>
       </FormField.Root>
 
-      {state.error && <p className={styles.globalError}>{state.error}</p>}
-
-      <Button type="submit" disabled={isPending}>
-        {isPending ? 'Loading...' : 'Login'}
+      <Button disabled={!isValid || isPending || isSubmitting} type="submit">
+        {isPending || isSubmitting ? 'Loading...' : 'Login'}
       </Button>
     </form>
   );
