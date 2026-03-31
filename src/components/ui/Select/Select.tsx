@@ -32,11 +32,11 @@ const Select = ({ name, defaultValue, options, placeholder = 'Select option', cl
           <BaseSelect.Popup className={styles.popup}>
             {options.map((option) => (
               <BaseSelect.Item key={option.value} className={styles.item} value={option.value}>
+                <BaseSelect.ItemText>{option.label}</BaseSelect.ItemText>
+
                 <BaseSelect.ItemIndicator className={styles.indicator}>
                   <Check size={14} />
                 </BaseSelect.ItemIndicator>
-
-                <BaseSelect.ItemText>{option.label}</BaseSelect.ItemText>
               </BaseSelect.Item>
             ))}
           </BaseSelect.Popup>

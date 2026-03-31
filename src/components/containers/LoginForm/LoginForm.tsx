@@ -7,11 +7,12 @@ import { FormField } from '@/components/elements/FormField/FormField';
 import { Button } from '@/components/ui/Button/Button';
 import { Input } from '@/components/ui/Input/Input';
 import { INITIAL_STATE, SIGN_IN_FORM_FIELDS } from '@/constants/auth.constant';
+import type { TActionState } from '@/types/auth.type';
 
 import styles from './LoginForm.module.scss';
 
 const LoginForm = () => {
-  const [state, formAction, isPending] = useActionState(signIn, INITIAL_STATE);
+  const [state, formAction, isPending] = useActionState<TActionState, FormData>(signIn, INITIAL_STATE);
 
   const emailError = state.errors?.email?.[0];
   const passwordError = state.errors?.password?.[0];

@@ -1,12 +1,17 @@
 'use client';
 
 import { UsersGrid } from '@/components/elements/UsersGrid/UsersGrid';
+import { UsersTableSkeleton } from '@/components/elements/UsersTableSkeleton/UsersTableSkeleton';
 
 import { useUsersTable } from './hooks/useUsersTable';
 import styles from './UsersTableContainer.module.scss';
 
 const UsersTableContainer = () => {
   const { users, isLoading, usersCount } = useUsersTable();
+
+  if (isLoading) {
+    return <UsersTableSkeleton />;
+  }
 
   return (
     <section className={styles.section}>
@@ -20,7 +25,7 @@ const UsersTableContainer = () => {
       </div>
 
       <div className={styles.tableSection}>
-        {isLoading ? <div className={styles.loader}>Loading users...</div> : <UsersGrid users={users} />}
+        <UsersGrid users={users} />
       </div>
     </section>
   );

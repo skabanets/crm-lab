@@ -1,0 +1,87 @@
+@use '@/styles/mixins' as *;
+@use '@/styles/variables' as *;
+
+.page {
+  @include flex(column, stretch, flex-start);
+
+  gap: $spacing-lg;
+  width: 100%;
+}
+
+.header {
+  @include flex(column, flex-start, flex-start);
+
+  gap: $spacing-md;
+}
+
+.heading {
+  @include flex(column, flex-start, flex-start);
+
+  gap: $spacing-xs;
+}
+
+.breadcrumbs {
+  width: 180px;
+  height: 16px;
+}
+
+.title {
+  width: 220px;
+  height: 32px;
+}
+
+.subtitle {
+  width: 320px;
+  height: 16px;
+}
+
+.form {
+  @include flex(column, stretch, flex-start);
+
+  gap: $spacing-lg;
+  padding: $spacing-lg;
+  border: 1px solid $border;
+  border-radius: $radius-xl;
+  background: $surface;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: $spacing-md;
+}
+
+.field {
+  @include flex(column, stretch, flex-start);
+
+  gap: $spacing-sm;
+}
+
+.label {
+  width: 100px;
+  height: 14px;
+}
+
+.input {
+  width: 100%;
+  height: 44px;
+}
+
+.actions {
+  @include flex(row, center, flex-end);
+}
+
+.button {
+  width: 140px;
+  height: 44px;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .subtitle {
+    width: 260px;
+  }
+}

@@ -26,8 +26,8 @@ type TUserFormErrors = Partial<
 >;
 
 type TUpdateUserState = {
-  error?: string;
   errors?: TUserFormErrors;
+  error?: string;
 };
 
 export type { TUserRole, TUserStatus, TSidebarUser, TUser, TUserFormErrors, TUpdateUserState };

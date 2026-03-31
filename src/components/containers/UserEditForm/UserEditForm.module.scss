@@ -1,30 +1,6 @@
 @use '@/styles/mixins' as *;
 @use '@/styles/variables' as *;
 
-.section {
-  @include flex(column, stretch, flex-start);
-
-  gap: $spacing-lg;
-  width: 100%;
-}
-
-.header {
-  @include flex(column, flex-start, flex-start);
-
-  gap: $spacing-xs;
-}
-
-.title {
-  font-size: 28px;
-  font-weight: 700;
-  color: $text;
-}
-
-.subtitle {
-  font-size: 14px;
-  color: $text-muted;
-}
-
 .form {
   @include flex(column, stretch, flex-start);
 

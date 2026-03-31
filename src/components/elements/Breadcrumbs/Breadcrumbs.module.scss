@@ -1,0 +1,42 @@
+@use '@/styles/mixins' as *;
+@use '@/styles/variables' as *;
+
+.breadcrumbs {
+  width: 100%;
+}
+
+.list {
+  @include flex(row, center, flex-start);
+
+  flex-wrap: wrap;
+  gap: $spacing-xs;
+  list-style: none;
+}
+
+.item {
+  @include flex(row, center, flex-start);
+
+  gap: $spacing-xs;
+}
+
+.link {
+  @include transition;
+
+  font-size: 14px;
+  color: $text-muted;
+  text-decoration: none;
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+.current {
+  font-size: 14px;
+  font-weight: 500;
+  color: $text;
+}
+
+.separator {
+  color: $text-muted;
+}
