@@ -16,7 +16,7 @@ const UserFormSkeleton = () => {
 
       <div className={styles.form}>
         <div className={styles.grid}>
-          {Array.from({ length: 20 }).map((_, index) => (
+          {Array.from({ length: 6 }).map((_, index) => (
             <div className={styles.field} key={index}>
               <Skeleton className={styles.label} />
               <Skeleton className={styles.input} />
