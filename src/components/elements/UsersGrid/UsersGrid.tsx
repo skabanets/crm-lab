@@ -27,18 +27,21 @@ const UsersGrid = ({ users }: TUsersGridProps) => {
         valueGetter: ({ data }) => (data ? `${data.first_name} ${data.last_name}` : ''),
         tooltipValueGetter: ({ data }) => (data ? `${data.first_name} ${data.last_name}` : ''),
         flex: 1.2,
+        minWidth: 160,
       },
       {
         field: 'email',
         headerName: 'Email',
         tooltipField: 'email',
         flex: 1.4,
+        minWidth: 220,
       },
       {
         field: 'phone',
         headerName: 'Phone',
         tooltipField: 'phone',
         flex: 1,
+        minWidth: 140,
       },
       {
         field: 'role',
@@ -46,6 +49,7 @@ const UsersGrid = ({ users }: TUsersGridProps) => {
         tooltipField: 'role',
         cellRenderer: RoleCell,
         flex: 0.9,
+        minWidth: 120,
       },
       {
         field: 'status',
@@ -53,6 +57,7 @@ const UsersGrid = ({ users }: TUsersGridProps) => {
         tooltipField: 'status',
         cellRenderer: StatusCell,
         flex: 0.9,
+        minWidth: 120,
       },
       {
         field: 'created_at',
@@ -60,6 +65,7 @@ const UsersGrid = ({ users }: TUsersGridProps) => {
         valueFormatter: ({ value }) => (value ? new Date(value).toLocaleDateString() : ''),
         tooltipValueGetter: ({ value }) => (value ? new Date(value).toLocaleString() : ''),
         flex: 1,
+        minWidth: 140,
       },
     ],
     []

@@ -31,7 +31,7 @@
   :global(.ag-cell) {
     display: flex;
     align-items: center;
-    overflow: visible;
+    overflow: hidden;
     padding-top: 4px;
     padding-bottom: 4px;
   }
@@ -41,13 +41,15 @@
     align-items: center;
     width: 100%;
     min-height: 100%;
-    overflow: visible;
+    overflow: hidden;
   }
 
   :global(.ag-cell-value) {
-    display: flex;
-    align-items: center;
-    overflow: visible;
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   :global(.ag-root-wrapper) {
