@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 
 import { SIGN_IN_FORM_FIELDS } from '@/constants/auth.constant';
 import { ROUTES } from '@/constants/routes.constant';
+import { sendN8nNotification } from '@/lib/n8n/sendN8nNotification';
 import { createSupabaseServerClient } from '@/lib/supabase/server';
 import { signInSchema } from '@/schemas/auth.schema';
 import type { TActionState } from '@/types/auth.type';
@@ -40,6 +41,10 @@ const signIn = async (_state: TActionState, formData: FormData): Promise<TAction
       error: 'Incorrect email or password',
     };
   }
+
+  await sendN8nNotification({
+    message: `✅ User logged in: ${email}`,
+  });
 
   revalidatePath('/');
   redirect(ROUTES.USERS);

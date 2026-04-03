@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache';
 
 import { ROUTES } from '@/constants/routes.constant';
 import { USER_FORM_FIELDS } from '@/constants/user.constant';
+import { sendN8nNotification } from '@/lib/n8n/sendN8nNotification';
 import { createSupabaseServerClient } from '@/lib/supabase/server';
 import { updateUserSchema } from '@/schemas/user.schema';
 import type { TUpdateUserState } from '@/types/user.type';
@@ -56,6 +57,15 @@ const updateUser = async (_state: TUpdateUserState, formData: FormData): Promise
       success: false,
     };
   }
+
+  await sendN8nNotification({
+    message:
+      `✏️ User updated\n` +
+      `Name: ${first_name} ${last_name}\n` +
+      `Email: ${email}\n` +
+      `Role: ${role}\n` +
+      `Status: ${status}`,
+  });
 
   revalidatePath(ROUTES.USERS);
   revalidatePath(`${ROUTES.USERS}/${id}`);
