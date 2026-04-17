@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 
 import { SidebarNavigation } from '@/components/elements/SidebarNavigation/SidebarNavigation';
 import { UserMenu } from '@/components/elements/UserMenu/UserMenu';
-import { createSupabaseServerClient } from '@/lib/supabase/server';
+// import { createSupabaseServerClient } from '@/lib/supabase/server';
 
 import styles from './PrivateLayout.module.scss';
 
@@ -11,18 +11,20 @@ type TPrivateLayoutProps = {
 };
 
 const PrivateLayout = async ({ children }: TPrivateLayoutProps) => {
-  const supabase = await createSupabaseServerClient();
+  // const supabase = await createSupabaseServerClient();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  // const {
+  //   data: { user },
+  // } = await supabase.auth.getUser();
 
-  const sidebarUser = user
-    ? {
-        id: user.id,
-        email: user.email ?? '',
-      }
-    : null;
+  // const sidebarUser = user
+  //   ? {
+  //       id: user.id,
+  //       email: user.email ?? '',
+  //     }
+  //   : null;
+
+  const sidebarUser = null;
 
   return (
     <div className={styles.layout}>
