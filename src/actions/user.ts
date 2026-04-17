@@ -58,14 +58,14 @@ const updateUser = async (_state: TUpdateUserState, formData: FormData): Promise
     };
   }
 
-  await sendN8nNotification({
+  sendN8nNotification({
     message:
       `✏️ User updated\n` +
       `Name: ${first_name} ${last_name}\n` +
       `Email: ${email}\n` +
       `Role: ${role}\n` +
       `Status: ${status}`,
-  });
+  }).catch(console.error);
 
   revalidatePath(ROUTES.USERS);
   revalidatePath(`${ROUTES.USERS}/${id}`);

@@ -42,9 +42,9 @@ const signIn = async (_state: TActionState, formData: FormData): Promise<TAction
     };
   }
 
-  await sendN8nNotification({
-    message: `✅ User logged in: ${email}`,
-  });
+  sendN8nNotification({
+    message: `User logged in: ${email}`,
+  }).catch(console.error);
 
   revalidatePath('/');
   redirect(ROUTES.USERS);
